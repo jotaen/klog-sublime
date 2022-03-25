@@ -1,0 +1,39 @@
+2022-01-01 (5h!)
+4h #bar (5h!)
+Test #123 #foo-bar.
+	4h
+	1m
+	10m
+	22h
+	3h12m
+	4h Do #something (5h!)
+		4h <- this is continued summary, not
+		the next #entry!
+	4h
+		Multiline #summary
+			   Foo #bar
+			   										.
+	4h30m       Do #something (5h!)
+	+4h30m	Do something (5h!)
+	-1h20m
+	-1h Test
+	4:00 - 17:00 asdf #foo_bar
+	<4:00 - 17:00> asdf #foo
+	4:00am - 5:00pm asdf #foo
+	4:00am - 5:00pm> asdf #foo
+	15:00>-? Foo
+	15:00 - ??? Foo
+
+2022-01-01
+
+2022-01-01
+2022-01-01
+
+2022-01-01
+4h <- this is not an entry
+
+1234/12/31    (+3h!)
+Record without entries
+
+1999/01/01 (-1m!)   
+	45m Record without record summary
