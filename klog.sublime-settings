@@ -1,0 +1,16 @@
+{
+	// Enforce Mariana scheme, since colors have special
+	// meaning in klog, so we can’t use the general-purpose ones.
+	"color_scheme": "Mariana.sublime-color-scheme",
+
+	// Disable indentation-related features.
+	"smart_indent": false,
+
+	// Per specification, klog files must be UTF-8.
+	"default_encoding": "UTF-8",
+
+	// Tab completion doesn’t make sense for a data format,
+	// and it makes text-aligning harder.
+	"tab_completion": false,
+	"auto_complete": false,
+}

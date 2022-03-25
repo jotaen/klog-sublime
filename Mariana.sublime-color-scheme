@@ -1,0 +1,44 @@
+{
+	"variables": {},
+	"globals": {},
+	"rules": [
+		{
+			"scope": "source.klog",
+			"foreground": "#ffffff",
+		},
+		{
+			"scope": "date.klog",
+			"foreground": "#ffffff",
+			"font_style": "underline bold"
+		},
+		{
+			"scope": "summary.text.klog",
+			"foreground": "#aaaaaa",
+		},
+		{
+			"scope": "summary.tag.klog",
+			"foreground": "#c9c9c9",
+			"font_style": "italic"
+		},
+		{
+			"scope": "should_total.klog",
+			"foreground": "#ef7af5",
+		},
+		{
+			"scope": "entry.duration.klog",
+			"foreground": "#91f578",
+		},
+		{
+			"scope": "entry.negative_duration.klog",
+			"foreground": "#f58078",
+		},
+		{
+			"scope": "entry.range.klog",
+			"foreground": "#86c8f7",
+		},
+		{
+			"scope": "entry.open_range.klog",
+			"foreground": "#86c8f7",
+		},
+	]
+}
