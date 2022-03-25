@@ -18,50 +18,100 @@ variables:
   indentation: '(\t|    |   |  )'
 contexts:
   main:
-  - match: '{{blankline}}'
-    pop: 1
+  - include: record
+
+  record:
+  # A record must start with a date.
   - match: '^({{date}})'
     scope: date.klog
     push:
+
+    # Then, there may follow a should total on the same line.
     - match: '(\s+{{should_total}})?\s*'
       scope: should_total.klog
+
+    - match: '.*'
+      scope: invalid
+
+    # End of headline.
     - match: '$'
-      push:
-      - match: '{{blankline}}'
-        pop: 3
-      - match: '^(?=\s)'
-        push: entry
-      - match: '^'
-        push: record_summary
+      push: record_summary
+
+  record_summary:
+  # Exit on blank line.
+  - match: '{{blankline}}'
+    pop: 99999
+
+  # A record summary line cannot start with whitespace.
+  - match: '^(?=[^\s])'
+    push:
+    - meta_scope: summary.text.klog
+    - include: tag
+    - match: '^(?=\s)'
+      pop: 1
+
+  # The first indented line begins the entries section.
+  # It must be indented exactly once.
+  - match: '^(?={{indentation}}[^\s])'
+    push: entries
+
+  # Anything else would be illegal.
+  - match: '^.*'
+    scope: invalid
+    pop: 1 # Continue parsing, though.
+
+  entries:
+  # Exit on blank line.
+  - match: '{{blankline}}'
+    pop: 99999
+
+  # When the line is indented, it’s an entry.
+  - match: '^{{indentation}}'
+    push:
+    - match: '{{duration_positive}}'
+      scope: entry.duration.klog
+      push: entry_summary
+    - match: '{{duration_negative}}'
+      scope: entry.negative_duration.klog
+      push: entry_summary
+    - match: '{{range}}'
+      scope: entry.range.klog
+      push: entry_summary
+    - match: '{{open_range}}'
+      scope: entry.open_range.klog
+      push: entry_summary
+
+    # Exit on blank line.
+    - match: '{{blankline}}'
+      pop: 99999
+
+  # Show error if the line contains something else.
+  - match: '.*'
+    scope: invalid
+
+  entry_summary:
+  # Parse the remainder of the first line, and continue on the next.
+  - match: '(?=\s|$)'
+    push:
+    - meta_scope: summary.text.klog
+    - include: tag
+
+    # Exit on blank line.
+    - match: '{{blankline}}'
+      pop: 99999
+
+    # When it’s indented multiple times, it’s a multiline
+    # entry summary.
+    - match: '^{{indentation}}\s'
+
+    # Exit otherwise.
+    - match: '^'
+      pop: 3
+
+  # Show error, if the continuation on the first line is invalid.
+  - match: '.*'
+    scope: invalid
+
   tag:
   - match: '\#[\p{L}\d_]+'
     scope: summary.tag.klog
-  record_summary:
-  - meta_scope: summary.text.klog
-  - include: tag
-  - match: '$'
-    pop: 1
-  entry_summary:
-  - meta_scope: summary.text.klog
-  - include: tag
-  - match: '{{blankline}}'
-    pop: 3
-  - match: '^(?=\1[^\s])'
-    pop: 1
-  entry:
-  - match: '^{{indentation}}{{duration_positive}}(?=\s|$)'
-    scope: entry.duration.klog
-    push: entry_summary
-    pop: 1
-  - match: '^{{indentation}}{{duration_negative}}(?=\s|$)'
-    scope: entry.negative_duration.klog
-    push: entry_summary
-    pop: 1
-  - match: '^{{indentation}}{{range}}(?=\s|$)'
-    scope: entry.range.klog
-    push: entry_summary
-    pop: 1
-  - match: '^{{indentation}}{{open_range}}(?=\s|$)'
-    scope: entry.open_range.klog
-    push: entry_summary
-    pop: 1

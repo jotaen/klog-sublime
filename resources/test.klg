@@ -1,39 +1,48 @@
 2022-01-01 (5h!)
-4h #bar (5h!)
-Test #123 #foo-bar.
-	4h
-	1m
+Test #record with #tags. No should-total -> (5h!)
+This is an all-valid record.
+4h <- no #duration!
+	0m
+	0h
 	10m
 	22h
 	3h12m
-	4h Do #something (5h!)
-		4h <- this is continued summary, not
-		the next #entry!
+	4h Do #something No should-total -> (5h!)
+		4h <- this is continued summary text,
+		and not the next #entry!
+			And so is this.
 	4h
-		Multiline #summary
-			   Foo #bar
-			   										.
-	4h30m       Do #something (5h!)
-	+4h30m	Do something (5h!)
+		Multiline #summaries can
+			   also start
+			   										on the next line.
+	4h30m       Do #something
+	+4h30m	#Do something
 	-1h20m
 	-1h Test
-	4:00 - 17:00 asdf #foo_bar
-	<4:00 - 17:00> asdf #foo
-	4:00am - 5:00pm asdf #foo
-	4:00am - 5:00pm> asdf #foo
+	0:00 - 1:00
+	04:00-17:00 asdf #foo_bar
+	<4:00 - 17:00> asdf #foo #bar
+	4:00am - 5:00pm asdf
+	4:00am-5:00pm>
 	15:00>-? Foo
 	15:00 - ??? Foo
 
 2022-01-01
+This record is indented with 2 spaces.
+  4h <- This is an entry value.
+    4h <- this is continues summary text.
 
 2022-01-01
 2022-01-01
+^^^^^^^^^^ This is summary, not a date.
 
-2022-01-01
+2022-01-01 (-1m!)   
 4h <- this is not an entry
 
 1234/12/31    (+3h!)
-Record without entries
 
-1999/01/01 (-1m!)   
-	45m Record without record summary
+1999/01/01a Illegal: Headline cannot contain arbitrary text.
+ a Illegal: record summary lines cannot start with whitespace.
+		5h Illegal: First indentation must be once.
+	4hfoo Illegal: no space between value and summary.
+a Illegal: cannot have un-indented line after entries.
