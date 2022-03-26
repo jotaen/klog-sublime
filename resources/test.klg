@@ -33,7 +33,6 @@ This record is indented with 2 spaces.
     4h <- this is continues summary text.
 
 2022-01-01
-2022-01-01
 ^^^^^^^^^^ This is summary, not a date.
 
 2022-01-01 (-1m!)   
@@ -41,8 +40,9 @@ This record is indented with 2 spaces.
 
 1234/12/31    (+3h!)
 
-1999/01/01a Illegal: Headline cannot contain arbitrary text.
+1999/01/01 Unrecognised: Headline cannot contain arbitrary text.
  a Illegal: record summary lines cannot start with whitespace.
 		5h Illegal: First indentation must be once.
 	4hfoo Illegal: no space between value and summary.
+	asdf 4h Unrecognised, if the value is invalid. (This is not marked as illegal, though.)
 a Illegal: cannot have un-indented line after entries.
