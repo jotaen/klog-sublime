@@ -1,6 +1,6 @@
 # klog for Sublime Text
 
-This packages provides support for working with [klog time tracking](https://klog.jotaen.net) files in the Sublime Text editor:
+This package provides support for working with [klog time tracking](https://klog.jotaen.net) files in the Sublime Text editor:
 
 - Syntax highlighting
 	+ If you use the Mariana or Monokai theme, it also assigns meaningful colouring.
