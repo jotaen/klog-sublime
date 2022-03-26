@@ -30,9 +30,6 @@ contexts:
     - match: '(\s+{{should_total}})?\s*'
       scope: variable.function meta.klog.should_total
 
-    - match: '.*'
-      scope: invalid
-
     # End of headline.
     - match: '$'
       push: record_summary
@@ -84,6 +81,11 @@ contexts:
     # Exit on blank line.
     - match: '{{blankline}}'
       pop: 99999
+
+    # Ignore if it doesn’t match an entry value. Otherwise it would
+    # show an error if the user is still typing the value.
+    - match: '.*'
+      pop: 1
 
   # Show error if the line contains something else.
   - match: '.*'
