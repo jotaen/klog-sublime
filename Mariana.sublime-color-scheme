@@ -1,5 +1,11 @@
 {
 	// https://www.sublimetext.com/docs/color_schemes.html
+	// https://www.sublimetext.com/docs/scope_naming.html
+
+	// The naming pattern of the scopes is this:
+	// [conventional_scheme].klog.[klog_scheme]
+	// The first part serves as a fallback, so that there
+	// is at least *some* colouring.
 
 	"variables": {},
 	"globals": {},
@@ -9,37 +15,33 @@
 			"foreground": "#ffffff",
 		},
 		{
-			"scope": "date.klog",
+			"scope": "constant.language.klog.date",
 			"foreground": "#ffffff",
 			"font_style": "underline"
 		},
 		{
-			"scope": "summary.text.klog",
+			"scope": "variable.klog.should_total",
+			"foreground": "#ef7af5",
+		},
+		{
+			"scope": "comment.klog.summary.text",
 			"foreground": "#aaaaaa",
 		},
 		{
-			"scope": "summary.tag.klog",
+			"scope": "comment.klog.summary.tag",
 			"foreground": "#c9c9c9",
 			"font_style": "italic"
 		},
 		{
-			"scope": "should_total.klog",
-			"foreground": "#ef7af5",
-		},
-		{
-			"scope": "entry.duration.klog",
+			"scope": "constant.numeric.klog.duration.positive",
 			"foreground": "#91f578",
 		},
 		{
-			"scope": "entry.negative_duration.klog",
+			"scope": "keyword.control.klog.duration.negative",
 			"foreground": "#f58078",
 		},
 		{
-			"scope": "entry.range.klog",
-			"foreground": "#86c8f7",
-		},
-		{
-			"scope": "entry.open_range.klog",
+			"scope": "string.quoted.klog.range",
 			"foreground": "#86c8f7",
 		},
 	]
