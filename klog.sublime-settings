@@ -1,8 +1,4 @@
 {
-	// Enforce Mariana scheme, since colors have special
-	// meaning in klog, so we can’t use the general-purpose ones.
-	"color_scheme": "Mariana.sublime-color-scheme",
-
 	// Disable indentation-related features.
 	"smart_indent": false,
 

@@ -23,12 +23,12 @@ contexts:
   record:
   # A record must start with a date.
   - match: '^({{date}})'
-    scope: constant.language.klog.date
+    scope: constant.language meta.klog.date
     push:
 
     # Then, there may follow a should total on the same line.
     - match: '(\s+{{should_total}})?\s*'
-      scope: variable.klog.should_total
+      scope: variable.function meta.klog.should_total
 
     - match: '.*'
       scope: invalid
@@ -45,7 +45,7 @@ contexts:
   # A record summary line cannot start with whitespace.
   - match: '^(?=[^\s])'
     push:
-    - meta_scope: comment.klog.summary.text
+    - meta_scope: comment meta.klog.summary.text
     - include: tag
     - match: '^(?=\s)'
       pop: 1
@@ -69,16 +69,16 @@ contexts:
   - match: '^{{indentation}}'
     push:
     - match: '{{duration_positive}}'
-      scope: constant.numeric.klog.duration.positive
+      scope: constant.numeric meta.klog.duration.positive
       push: entry_summary
     - match: '{{duration_negative}}'
-      scope: keyword.control.klog.duration.negative
+      scope: keyword.control meta.klog.duration.negative
       push: entry_summary
     - match: '{{range}}'
-      scope: string.quoted.klog.range.closed
+      scope: string.quoted meta.klog.range.closed
       push: entry_summary
     - match: '{{open_range}}'
-      scope: string.quoted.klog.range.open
+      scope: string.quoted meta.klog.range.open
       push: entry_summary
 
     # Exit on blank line.
@@ -93,7 +93,7 @@ contexts:
   # Parse the remainder of the first line, and continue on the next.
   - match: '(?=\s|$)'
     push:
-    - meta_scope: comment.klog.summary.text
+    - meta_scope: comment meta.klog.summary.text
     - include: tag
 
     # Exit on blank line.
@@ -114,4 +114,4 @@ contexts:
 
   tag:
   - match: '\#[\p{L}\d_]+'
-    scope: comment.klog.summary.tag
+    scope: comment meta.klog.summary.tag
