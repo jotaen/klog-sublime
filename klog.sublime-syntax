@@ -63,56 +63,44 @@ contexts:
     pop: 99999
 
   # When the line is indented, it’s an entry.
-  - match: '^{{indentation}}'
-    push:
-    - match: '{{duration_positive}}'
-      scope: constant.numeric meta.klog.duration.positive
-      push: entry_summary
-    - match: '{{duration_negative}}'
-      scope: keyword.control meta.klog.duration.negative
-      push: entry_summary
-    - match: '{{range}}'
-      scope: string.quoted meta.klog.range.closed
-      push: entry_summary
-    - match: '{{open_range}}'
-      scope: string.quoted meta.klog.range.open
-      push: entry_summary
+  - match: '^{{indentation}}{{duration_positive}}(?=\s|$)'
+    scope: constant.numeric meta.klog.duration.positive
+    push: entry_summary
+  - match: '^{{indentation}}{{duration_negative}}(?=\s|$)'
+    scope: keyword.control meta.klog.duration.negative
+    push: entry_summary
+  - match: '^{{indentation}}{{range}}(?=\s|$)'
+    scope: string.quoted meta.klog.range.closed
+    push: entry_summary
+  - match: '^{{indentation}}{{open_range}}(?=\s|$)'
+    scope: string.quoted meta.klog.range.open
+    push: entry_summary
 
-    # Exit on blank line.
-    - match: '{{blankline}}'
-      pop: 99999
-
-    # Ignore if it doesn’t match an entry value. Otherwise it would
-    # show an error if the user is still typing the value.
-    - match: '.*'
-      pop: 1
-
-  # Show error if the line contains something else.
-  - match: '.*'
+  # Error if next line doesn’t start with whitespace.
+  - match: '^[^\s].*'
     scope: invalid
+    pop: 99999
 
   entry_summary:
   # Parse the remainder of the first line, and continue on the next.
-  - match: '(?=\s|$)'
-    push:
-    - meta_scope: comment meta.klog.summary.text
-    - include: tag
+  - meta_scope: comment meta.klog.summary.text
+  - include: tag
 
-    # Exit on blank line.
-    - match: '{{blankline}}'
-      pop: 99999
+  # Exit on blank line.
+  - match: '{{blankline}}'
+    pop: 99999
 
-    # When it’s indented multiple times, it’s a multiline
-    # entry summary.
-    - match: '^{{indentation}}\s'
+  # Exit if next line is indented just once.
+  # It’s important to work with the `\1` matcher, otherwise
+  # it wouldn’t handle the indendation style correctly.
+  # `\1` can only be used in conjunction with `pop`, not `push`.
+  - match: '^(?=\1[^\s])'
+    pop: 1
 
-    # Exit otherwise.
-    - match: '^'
-      pop: 3
-
-  # Show error, if the continuation on the first line is invalid.
-  - match: '.*'
+  # Error if next line doesn’t start with whitespace.
+  - match: '^[^\s].*'
     scope: invalid
+    pop: 99999
 
   tag:
   - match: '\#[\p{L}\d_]+'
