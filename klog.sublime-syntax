@@ -23,12 +23,12 @@ contexts:
   record:
   # A record must start with a date.
   - match: '^({{date}})'
-    scope: constant.language meta.klog.date
+    scope: constant.language.klog entity.other.date.klog
     push:
 
     # Then, there may follow a should total on the same line.
     - match: '(\s+{{should_total}})?\s*'
-      scope: variable.function meta.klog.should_total
+      scope: variable.function.klog entity.other.should_total.klog
 
     # End of headline.
     - match: '$'
@@ -42,7 +42,7 @@ contexts:
   # A record summary line cannot start with whitespace.
   - match: '^(?=[^\s])'
     push:
-    - meta_scope: comment meta.klog.summary.text
+    - meta_scope: comment.klog entity.other.summary.text.klog
     - include: tag
     - match: '^(?=\s)'
       pop: 1
@@ -64,16 +64,16 @@ contexts:
 
   # When the line is indented, it’s an entry.
   - match: '^{{indentation}}{{duration_positive}}(?=\s|$)'
-    scope: constant.numeric meta.klog.duration.positive
+    scope: constant.numeric.klog entity.other.duration.positive.klog
     push: entry_summary
   - match: '^{{indentation}}{{duration_negative}}(?=\s|$)'
-    scope: keyword.control meta.klog.duration.negative
+    scope: keyword.control.klog entity.other.duration.negative.klog
     push: entry_summary
   - match: '^{{indentation}}{{range}}(?=\s|$)'
-    scope: string.quoted meta.klog.range.closed
+    scope: string.quoted.klog entity.other.range.closed.klog
     push: entry_summary
   - match: '^{{indentation}}{{open_range}}(?=\s|$)'
-    scope: string.quoted meta.klog.range.open
+    scope: string.quoted.klog entity.other.range.open.klog
     push: entry_summary
 
   # Error if next line doesn’t start with whitespace.
@@ -83,7 +83,7 @@ contexts:
 
   entry_summary:
   # Parse the remainder of the first line, and continue on the next.
-  - meta_scope: comment meta.klog.summary.text
+  - meta_scope: comment.klog entity.other.summary.text.klog
   - include: tag
 
   # Exit on blank line.
@@ -104,4 +104,4 @@ contexts:
 
   tag:
   - match: '\#[\p{L}\d_]+'
-    scope: comment meta.klog.summary.tag
+    scope: comment.klog entity.other.summary.tag.klog

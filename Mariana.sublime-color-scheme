@@ -8,35 +8,31 @@
 		{
 			"scope": "source.klog",
 			"foreground": "#ffffff",
-		},
-		{
-			"scope": "meta.klog.date",
+		}, {
+			"scope": "entity.other.date.klog",
 			"foreground": "#ffffff",
 			"font_style": "underline",
-		},
-		{
-			"scope": "meta.klog.should_total",
+		}, {
+			"scope": "entity.other.should_total.klog",
 			"foreground": "#ef7af5",
-		},
-		{
-			"scope": "meta.klog.summary.text",
+		}, {
+			"scope": "entity.other.summary.text.klog",
 			"foreground": "#aaaaaa",
-		},
-		{
-			"scope": "meta.klog.summary.tag",
+		}, {
+			"scope": "entity.other.summary.tag.klog",
 			"foreground": "#c9c9c9",
 			"font_style": "italic",
-		},
-		{
-			"scope": "meta.klog.duration.positive",
+		}, {
+			"scope": "entity.other.duration.positive.klog",
 			"foreground": "#8ce675",
-		},
-		{
-			"scope": "meta.klog.duration.negative",
+		}, {
+			"scope": "entity.other.duration.negative.klog",
 			"foreground": "#f58078",
-		},
-		{
-			"scope": "meta.klog.range",
+		}, {
+			"scope": "entity.other.range.closed.klog",
+			"foreground": "#86c8f7",
+		}, {
+			"scope": "entity.other.range.open.klog",
 			"foreground": "#86c8f7",
 		},
 	]
