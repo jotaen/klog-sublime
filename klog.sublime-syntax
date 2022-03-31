@@ -4,6 +4,7 @@
 name: klog
 file_extensions: [klg]
 scope: source.klog
+
 variables:
   date: '\d{4}[-/]\d{2}[-/]\d{2}'
   blankline: '^\s*$'
@@ -16,6 +17,7 @@ variables:
   range: '{{shifted_time}} ?- ?{{shifted_time}}'
   open_range: '{{shifted_time}} ?- ?\?+'
   indentation: '(\t|    |   |  )'
+
 contexts:
   main:
   - include: record
@@ -54,7 +56,7 @@ contexts:
 
   # Anything else would be illegal.
   - match: '^.*'
-    scope: invalid
+    scope: invalid.klog
     pop: 1 # Continue parsing, though.
 
   entries:
@@ -78,7 +80,7 @@ contexts:
 
   # Error if next line doesn’t start with whitespace.
   - match: '^[^\s].*'
-    scope: invalid
+    scope: invalid.klog
     pop: 99999
 
   entry_summary:
@@ -99,7 +101,7 @@ contexts:
 
   # Error if next line doesn’t start with whitespace.
   - match: '^[^\s].*'
-    scope: invalid
+    scope: invalid.klog
     pop: 99999
 
   tag:
