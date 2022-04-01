@@ -119,4 +119,4 @@ contexts:
 
   tag:
   - match: '\#[\p{L}\d_]+'
-    scope: string.quoted markup.other.summary.tag.klog
+    scope: markup.raw.inline markup.other.summary.tag.klog
