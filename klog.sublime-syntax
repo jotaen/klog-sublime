@@ -19,18 +19,27 @@ variables:
   indentation: '(\t|    |   |  )'
 
 contexts:
+
+  # For every scope, there must be two values assigned:
+  # - One klog-specific scope, that’s unused by this
+  #   package, but that allows the user to setup overrides
+  #   conveniently.
+  # - One generic fallback scope, that will likely work
+  #   out of the box for most color schemes.
+
   main:
   - include: record
 
   record:
   # A record must start with a date.
   - match: '^({{date}})'
-    scope: constant.language.klog entity.other.date.klog
+    scope: markup.underline.klog markup.other.date.klog
     push:
 
     # Then, there may follow a should total on the same line.
-    - match: '(\s+{{should_total}})?\s*'
-      scope: variable.function.klog entity.other.should_total.klog
+    - match: '(\s+({{should_total}}))?\s*'
+      captures:
+        2: constant.numeric.klog markup.other.should_total.klog
 
     # End of headline.
     - match: '$'
@@ -44,7 +53,7 @@ contexts:
   # A record summary line cannot start with whitespace.
   - match: '^(?=[^\s])'
     push:
-    - meta_scope: comment.klog entity.other.summary.text.klog
+    - meta_scope: comment.klog markup.other.summary.klog
     - include: tag
     - match: '^(?=\s)'
       pop: 1
@@ -65,17 +74,21 @@ contexts:
     pop: 99999
 
   # When the line is indented, it’s an entry.
-  - match: '^{{indentation}}{{duration_positive}}(?=\s|$)'
-    scope: constant.numeric.klog entity.other.duration.positive.klog
+  - match: '^{{indentation}}({{duration_positive}})(?=\s|$)'
+    captures:
+      2: markup.inserted.klog markup.other.duration_positive.klog
     push: entry_summary
-  - match: '^{{indentation}}{{duration_negative}}(?=\s|$)'
-    scope: keyword.control.klog entity.other.duration.negative.klog
+  - match: '^{{indentation}}({{duration_negative}})(?=\s|$)'
+    captures:
+      2: markup.deleted.klog markup.other.duration_negative.klog
     push: entry_summary
-  - match: '^{{indentation}}{{range}}(?=\s|$)'
-    scope: string.quoted.klog entity.other.range.closed.klog
+  - match: '^{{indentation}}({{range}})(?=\s|$)'
+    captures:
+      2: variable.function.klog markup.other.range.klog
     push: entry_summary
-  - match: '^{{indentation}}{{open_range}}(?=\s|$)'
-    scope: string.quoted.klog entity.other.range.open.klog
+  - match: '^{{indentation}}({{open_range}})(?=\s|$)'
+    captures:
+      2: variable.function.klog markup.other.open_range.klog
     push: entry_summary
 
   # Error if next line doesn’t start with whitespace.
@@ -85,7 +98,7 @@ contexts:
 
   entry_summary:
   # Parse the remainder of the first line, and continue on the next.
-  - meta_scope: comment.klog entity.other.summary.text.klog
+  - meta_scope: comment.klog markup.other.summary.klog
   - include: tag
 
   # Exit on blank line.
@@ -106,4 +119,4 @@ contexts:
 
   tag:
   - match: '\#[\p{L}\d_]+'
-    scope: comment.klog entity.other.summary.tag.klog
+    scope: string.quoted markup.other.summary.tag.klog
