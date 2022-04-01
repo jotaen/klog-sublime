@@ -4,6 +4,8 @@ This package provides support for working with [klog time tracking](https://klog
 
 ![A klog file with sample data](resources/example.png)
 
+## Features
+
 - Syntax highlighting
 - Smart completion for inserting the current date or time. For example:
 	+ Typing `today` completes to the current date
