@@ -118,5 +118,5 @@ contexts:
     pop: 99999
 
   tag:
-  - match: '\#[\p{L}\d_]+'
+  - match: (((?<=[\s\p{P}])|(?<=^))\#[\p{L}\d_-]+)(=((\'.*\')|(".*")|([\p{L}\d_-]+)))?
     scope: markup.raw.inline markup.other.summary.tag.klog

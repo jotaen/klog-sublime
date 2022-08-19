@@ -1,65 +1,88 @@
-2022-01-01 (5h!)
-Test #record with #tags. No should-total -> (5h!)
-This is an all-valid record. It’s indented with tabs.
-4h <- no #duration!
-	0m
-	0h
-	10m
-	22h -1h
-	3h12m 3h12m
-	4h Do #something No should-total -> (5h!)
-	4h
-		Multiline #summaries can
-			   also start
-			   										on the next line.
-	4h30m       Do #something
-	+4h30m 	#Do something <- summary is separated by one tab
-	-1h20m
-	-1h Test
-	0:00 - 1:00
-	04:00-17:00 asdf #foo_bar?
-	<4:00 - 17:00> asdf #foo: #bar!
-	4:00am - 5:00pm 1:00 - 2:00
-	4:00am-5:00pm>
-	15:00>-? Foo
-	15:00 - ??? Foo
+2022-08-19
+First day at my new #job!
+    8:30 - 17:00
+    -45m Lunch break
 
-2022-01-01
-This record is #indented with 2 spaces.
-  4h <- This is an #entry value.
-    4h <- this is continued #summary text.
-  -3h But this is an #entry again.
+2022-08-19
 
-2022-01-01
-This record is indented with 3 spaces.
-   4h <- Entry value.
-      4h <- Continued summary text.
-   -3h Entry value.
+2022/08/19
 
-2022-01-01
-This record is indented with 4 spaces.
-    4h <- Entry value.
-        4h <- Continued summary text.
-    -3h <- Entry value.
+2018-03-24 (8h!)
 
-2022-01-01
-This record is indented with tabs.
-	4h <- Entry value.
-		4h <- Continued summary text.
-	-3h <- Entry value.
+1234/12/31    (+3h!)
+
+1234/12/31    (-3m!)
+
+2022-08-19 (2m!)
+No entries
 
 2022-01-01
 2022-01-01
 ^^^^^^^^^^ This is summary, not a date.
 
-2022-01-01 (-1m!)   
-4h <- this is not an entry
+2018-03-25 (8h5m!)
+Indentation 2 spaces
+  8h15m
 
-1234/12/31    (+3h!)
+2018-03-25
+Indentation 3 spaces
+   8h15m
 
-1999/01/01 Unrecognised: Headline cannot contain arbitrary text.
- a Illegal: record summary lines cannot start with whitespace.
-		5h Illegal: First indentation must be once.
-	asdf 4h Unrecognised, if the value is invalid. (This is not marked as illegal, though.)
-	4hfoo Unrecognised: for the same reason as above.
-a Illegal: cannot have un-indented line after entries.
+2018-03-25
+Indentation 4 spaces
+    8h15m
+
+2018-03-25
+Indentation 1 tab
+	8h15m
+
+2018-03-26
+Various entries
+	1h
+	3m
+	5h12m
+	+2h12m
+	-2h15m
+	18:00-19:00
+	18:00 - 19:00
+	9:00 - 09:00
+	<8:00 - 9:00>
+	15:00 - ?
+	2:00am - 3:00pm
+	<10:00am-<11:00pm
+
+2022-08-19
+Entries with summaries
+	1h Single line
+	1h Multiple
+		lines
+	1h
+		Subsequent line
+
+2018-03-26
+Entries that contain “entry values” as text
+	1h 1h
+	3m 3m
+	5h12m 18:00-19:00
+		18:00-19:00
+	8m
+		18:00-19:00
+	18:00 - 19:00 - ?
+
+2022-08-18
+All legit tags:
+#tag #tag-with-dash #tag_with_underscore
+#tag=with-value #tag='with single-quoted value'
+#tag="with double-quoted value"      #tag
+#tag-value='with (crazy?) punctu4t!on...'
+#tag='with no value (closing quote missing)
+#tag="with no value (closing quote missing)
+#tag=?without value
+#surrounded! #by: (#punctuation) with-#dash.
+##tag ##tag#no-tag
+	4h That’s a #tag-inside=an_entry! #foo
+
+2022-08-19
+Non-legit tags:
+no#tag NO#tag
+http://example.org#notag
