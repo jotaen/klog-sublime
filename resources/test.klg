@@ -73,6 +73,7 @@ Entries that contain “entry values” as text
 All legit tags:
 #tag #tag-with-dash #tag_with_underscore
 #tag=with-value #tag='with single-quoted value'
+#tag='value' and another #tag='value'
 #tag="with double-quoted value"      #tag
 #tag-value='with (crazy?) punctu4t!on...'
 #tag='with no value (closing quote missing)
